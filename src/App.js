@@ -18,8 +18,11 @@ export function MovieReview(props){
             <h2>{movie.name}</h2>
             <p>Release: {movie.releaseDate}</p>
             <p>Actors: {movie.actors}</p>
-            <img src={movie.image}/>
             <p>Ratings: {movie.ratings}</p>
+            <img src={movie.image} alt={movie.name} />
+            <div>
+              <button onClick={() => props.removeMovies(movie)}>Remove this movie</button>
+            </div>
           </div>
         ))}
       </div>
@@ -43,7 +46,7 @@ export function MovieForm(){
 }
 
 function App() {
-  let [movies, setMovies] = useState(null);
+  const [movies, setMovies] = useState(null);
   useEffect( () => {
     fetch("./movies.json")
     .then(response => response.json())
@@ -53,10 +56,15 @@ function App() {
 
   if (movies == null) {
     return <h1>Loading movies...</h1>
-  }
+  };
+
+  const removeMovies = (movieToRemove) => {
+    setMovies((rest) => rest.filter((review) => review.name !== movieToRemove.name))
+  };
+
   return (
     <Routes>
-        <Route path="/" element={<MovieReview movies={(movies)}/>}></Route>
+        <Route path="/" element={<MovieReview movies={(movies)} removeMovies={removeMovies}/>}></Route>
         <Route path="/leave-review" element={<MovieForm />}></Route>
     </Routes>
   );
