@@ -19,7 +19,7 @@ function Main() {
   };
 
   const removeMovies = (movieToRemove) => {
-    alert(`${movieToRemove.name} is removed`);
+    alert(`${movieToRemove.name} has been removed`);
     setMovies((rest) => rest.filter((review) => review.name !== movieToRemove.name))
   };
 

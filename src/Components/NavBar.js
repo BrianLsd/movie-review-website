@@ -6,7 +6,7 @@ const NavBar = () => {
     <Navbar bg="primary" variant="dark">
         <Container>
             <Nav className="me-auto">
-                <Nav.Link as={Link} to={"/"}>MovieReview</Nav.Link>
+                <Nav.Link as={Link} to={"/"}>Movie Review</Nav.Link>
                 <Nav.Link as={Link} to={"/leave-review"}>Leave Review</Nav.Link>
             </Nav>
         </Container>
