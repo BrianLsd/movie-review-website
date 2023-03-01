@@ -1,10 +1,19 @@
 import express from 'express';
 import {MongoClient} from 'mongodb';
+import path from 'path';
+import {fileURLToPath} from 'url';
+import multer from 'multer';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 8000;
 
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, '../posters')));
+
+const upload = multer({ dest: 'posters/' });
 
 // load movies
 app.get('/api/movies', async (req, res) => {
@@ -18,7 +27,7 @@ app.get('/api/movies', async (req, res) => {
 
 
 // add a new movie
-app.post('/api/leave-review', async (req, res) => {
+app.post('/api/leave-review', upload.single('image') ,async (req, res) => {
     const client = new MongoClient('mongodb://127.0.0.1:27017/');
     await client.connect();
 
@@ -26,7 +35,7 @@ app.post('/api/leave-review', async (req, res) => {
     const insertOperation = await db.collection('movies').insertOne({"name":req.body.name,
                                                                     "releaseDate":req.body.release, 
                                                                     "actors":req.body.actor, 
-                                                                    "image":req.body.image, 
+                                                                    "image":req.file.filename, 
                                                                     "ratings":req.body.rating});
     res.redirect('/');
 })
