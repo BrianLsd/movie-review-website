@@ -25,7 +25,6 @@ app.get('/api/movies', async (req, res) => {
     res.json(data);
 });
 
-
 // add a new movie
 app.post('/api/leave-review', upload.single('image') ,async (req, res) => {
     const client = new MongoClient('mongodb://127.0.0.1:27017/');
@@ -38,6 +37,21 @@ app.post('/api/leave-review', upload.single('image') ,async (req, res) => {
                                                                     "image":req.file.filename, 
                                                                     "ratings":req.body.rating});
     res.redirect('/');
+})
+
+// delete a movie
+app.delete('/api/remove-movie/:name', async (req, res) => {
+    const client = new MongoClient('mongodb://127.0.0.1:27017/');
+    await client.connect();
+    
+    const deleteQuery = req.params;
+
+    const db = client.db('movie-review-db');
+    const deleteOperation = await db.collection('movies').deleteOne(deleteQuery);
+    if (!deleteOperation) {
+        return res.status(404).json({ message: 'Movie not found' });
+    }
+    res.status(200).json({ message: 'Movie deleted' });
 })
 
 app.listen(port, () => console.log(`Server is running on localhost:${port}`));
