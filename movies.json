@@ -3,35 +3,35 @@
         "name":"Pulp Fiction",
         "releaseDate":"1994",
         "actors":"John Travolta, Bruce Willis, Samuel Jackson",
-        "image":"./images/pulp_fiction.jpg",
+        "image":"pulp_fiction.jpg",
         "ratings":"5/5"
     },
     {
         "name":"Scarface",
         "releaseDate":"1983",
         "actors":"Al Pacino, Steven Bauer, Michelle Pfeiffer",
-        "image":"./images/scarface.jpg",
+        "image":"scarface.jpg",
         "ratings":"5/5"
     },
     {
         "name":"Raging Bull",
         "releaseDate":"1980",
         "actors":"Robert De Niro, Martin Scorsese, Joe Pesci",
-        "image":"./images/raging_bull.jpg",
+        "image":"raging_bull.jpg",
         "ratings":"5/5"
     },
     {
         "name":"John Wick",
         "releaseDate":"2014",
         "actors":"Keanu Reeves, Lan McShane, Lance Reddick",
-        "image":"./images/john_wick.jpg",
+        "image":"john_wick.jpg",
         "ratings":"4/5"
     },
     {
         "name":"Saw IV",
         "releaseDate":"2007",
         "actors":"Tobin Bell, Betsy Russell, Scott Patterson",
-        "image":"./images/saw4.jpg",
+        "image":"saw4.jpg",
         "ratings":"3/5"
     }
 ]
