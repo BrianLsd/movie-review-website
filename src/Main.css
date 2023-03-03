@@ -1,11 +1,3 @@
-img {
-  height: 500px;
-  width:350px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 h1 {
   text-align: center;
 }
@@ -16,6 +8,7 @@ h2 {
 
 p {
   text-align: center;
+  font-size: 18px;
 }
 
 h5 {
@@ -23,14 +16,14 @@ h5 {
 }
 
 .background {
-  background-color:aliceblue;
+  background-color:rgb(250, 240, 200);
 }
 
 form {
   width: 500px;
   margin: 50px auto;
   padding: 30px;
-  background-color: lightyellow;
+  background-color: rgb(191, 253, 217);
   border: 2px solid black;
   border-radius: 5px;
   border-radius: 20px;
@@ -43,10 +36,5 @@ input, select {
   font-size: 14px;
   border: 2px solid #ccc;
   border-radius: 20px;
-}
-
-button {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
+  background-color: white;
 }

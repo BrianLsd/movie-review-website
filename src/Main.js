@@ -8,7 +8,7 @@ import MovieForm from './Pages/MovieForm';
 function Main() {
   const [movies, setMovies] = useState(null);
   useEffect( () => {
-    fetch("./movies.json")
+    fetch("/api/movies")
     .then(response => response.json())
     .then(setMovies)
     .catch(e => console.log(e))
@@ -18,9 +18,22 @@ function Main() {
     return <h1>Loading movies...</h1>
   };
 
-  const removeMovies = (movieToRemove) => {
-    alert(`${movieToRemove.name} has been removed`);
-    setMovies((rest) => rest.filter((review) => review.name !== movieToRemove.name))
+  const removeMovies = async (movieToRemove) => {
+    try {
+      const response = await fetch(`/api/remove-movie/${movieToRemove.name}`, {method:'POST'});
+      const {message} = await response.json();
+      if (response.status === 200){
+        alert(message);
+        fetch("/api/movies")
+        .then(response => response.json())
+        .then(setMovies)
+      } else {
+        alert(message);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    
   };
 
   return (

@@ -1,6 +1,8 @@
 import NavBar from '.././Components/NavBar';
 import Footer from ".././Components/Footer";
 import {useRef} from "react";
+import {Button} from "react-bootstrap";
+import Form from 'react-bootstrap/Form';
 
 function MovieForm(props){
     const movieName = useRef();
@@ -19,10 +21,8 @@ function MovieForm(props){
     "releaseDate":movieReleaseDate.current.value,
     "actors":movieActors.current.value,
     "image":movieImages.current.value,
-    "ratings":movieRatings.current.value});
-    props.movies.push(movieData);
+    "ratings":movieRatings.current.value, });
     props.setMovies(movieData);
-    alert(`${movieName.current.value} has been added.`)
     }
 
     return (
@@ -34,35 +34,28 @@ function MovieForm(props){
                 <h1>Leave a Review</h1>
             </div>
             <div>
-            <form onSubmit={submit}>
+            <Form method="post" action="/api/leave-review" encType='multipart/form-data'>
                 <h5>Title</h5>
-                <input ref = {movieName} type="text"></input>
+                <input name = "name" ref = {movieName} type="text"></input>
                 <h5>Release</h5>
-                <input ref = {movieReleaseDate} type="text"></input>
+                <input name = "release" ref = {movieReleaseDate} type="text"></input>
                 <h5>Actors</h5>
-                <input ref = {movieActors} type="text"></input>
+                <input name = "actor" ref = {movieActors} type="text"></input>
                 <h5>Ratings - /5</h5>
-                <select ref={movieRatings}>
+                <select name = "rating" ref={movieRatings}>
                 <option value="1/5">1</option>
                 <option value="2/5">2</option>
                 <option value="3/5">3</option>
                 <option value="4/5">4</option>
                 <option value="5/5">5</option>
                 </select>
-                <h5>Select Image</h5>
-                <select ref={movieImages}>
-                <option value="./images/pulp_fiction.jpg">Pulp Fiction</option>
-                <option value="./images/scarface.jpg">Scarface</option>
-                <option value="./images/raging_bull.jpg">Raging Bull</option>
-                <option value="./images/john_wick.jpg">John Wick</option>
-                <option value="./images/saw4.jpg">Saw IV</option>
-                <option value="./images/placeholder.jpg">Other</option>
-                </select>
-            <div>
+                <h5>Upload Image</h5>
+                <input type='file' name='image' ref={movieImages}></input>
+                <div style={{ display: "flex", justifyContent: "center" }}>
                 <br/>
-                <button style={{ display: "flex", justifyContent: "center" }}>Submit</button>
-            </div>
-            </form>
+                    <Button  variant="danger" type='submit'>Submit</Button>
+                </div>
+            </Form>
             <Footer />
         </div>
     </div>

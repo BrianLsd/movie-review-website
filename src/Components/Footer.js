@@ -2,8 +2,8 @@ import Card from 'react-bootstrap/Card';
 
 function Footer() {
     return (
-        <Card bg="primary" text="light" className="text-center">
-            <Card.Body>React Assignment - Zhe Li</Card.Body>
+        <Card bg="dark" text="light" className="text-center">
+            <Card.Body>Movie Reviews - Zhe Li</Card.Body>
         </Card>
     );
 }
