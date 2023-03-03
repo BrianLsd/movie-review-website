@@ -12,6 +12,11 @@ const port = 8000;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../posters')));
+app.use(express.static(path.join(__dirname, '../build')));
+
+app.get(/^(?!\/api).+/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 const upload = multer({ dest: 'posters/' });
 
@@ -40,7 +45,7 @@ app.post('/api/leave-review', upload.single('image') ,async (req, res) => {
 })
 
 // delete a movie
-app.delete('/api/remove-movie/:name', async (req, res) => {
+app.post('/api/remove-movie/:name', async (req, res) => {
     const client = new MongoClient('mongodb://127.0.0.1:27017/');
     await client.connect();
     
@@ -48,10 +53,12 @@ app.delete('/api/remove-movie/:name', async (req, res) => {
 
     const db = client.db('movie-review-db');
     const deleteOperation = await db.collection('movies').deleteOne(deleteQuery);
-    if (!deleteOperation) {
-        return res.status(404).json({ message: 'Movie not found' });
+    if (deleteOperation) {
+        return res.status(200).json({ message: 'Movie has been deleted' });
+    } else {
+        return res.status(404).json({ message: 'Deletion failed...' });
     }
-    res.status(200).json({ message: 'Movie deleted' });
+    
 })
 
 app.listen(port, () => console.log(`Server is running on localhost:${port}`));
